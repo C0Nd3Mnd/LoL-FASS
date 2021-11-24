@@ -1,6 +1,8 @@
+IniPath := "settings.ini"
+
 ;;; CHOOSE ACCOUNT
 
-FileRead, RawAccounts, accounts.txt
+IniRead, RawAccounts, %IniPath%, Accounts
 
 Accounts := StrSplit(Trim(RawAccounts, OmitChars = " `t`n"), "`n")
 
@@ -8,7 +10,7 @@ Random, ChosenIndex, 1, Accounts.MaxIndex()
 
 ChosenAccount := Accounts[ChosenIndex]
 
-AccountDetails := StrSplit(ChosenAccount, " ")
+AccountDetails := StrSplit(ChosenAccount, "=")
 
 AccountUsername := AccountDetails[1]
 AccountPassword := AccountDetails[2]
