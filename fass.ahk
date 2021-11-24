@@ -55,6 +55,9 @@ Main:
     YesButtonY := ClientHeight * 0.6018
 
     ControlClick, x%CloseButtonX% y%CloseButtonY%, ahk_exe LeagueClientUx.exe
+
+    Sleep, 500
+
     ControlClick, x%ExitButtonX% y%ExitButtonY%, ahk_exe LeagueClientUx.exe
     ControlClick, x%YesButtonX% y%YesButtonY%, ahk_exe LeagueClientUx.exe
 
