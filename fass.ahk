@@ -103,4 +103,21 @@ Main:
   ; Login button
   Send, {Enter}
 
+  ; Press play if the window still exists (sometimes it doesn't launch
+  ; automatically).
+  Loop {
+    Sleep, 5000
+
+    if WinExist("Riot Client Main") {
+      WinGetPos, ,, LauncherWidth, LauncherHeight, Riot Client Main
+
+      PlayButtonX := LauncherWidth * 0.125
+      PlayButtonY := LauncherHeight * 0.9352
+
+      ControlClick, x%PlayButtonX% y%PlayButtonY%, Riot Client Main
+    } else {
+      break
+    }
+  }
+
   ExitApp, 0
