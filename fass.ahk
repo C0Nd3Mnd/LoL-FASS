@@ -48,7 +48,7 @@ Main:
     CloseButtonX := ClientWidth * 0.9849
     CloseButtonY := ClientHeight * 0.0203
     ; Can be an exit button...
-    ExitButtonX := ClientWidth * 0.5447
+    ExitButtonX := ClientWidth * 0.4557
     ExitButtonY := ClientHeight * 0.5574
     ; ...or a Yes button.
     YesButtonX := ClientWidth * 0.4739
@@ -56,12 +56,15 @@ Main:
 
     ControlClick, x%CloseButtonX% y%CloseButtonY%, ahk_exe LeagueClientUx.exe
 
+    ; Delay for a bit since the client can be slow to open the window sometimes.
     Sleep, 500
 
-    ControlClick, x%ExitButtonX% y%ExitButtonY%, ahk_exe LeagueClientUx.exe
+    ; Click the Yes button first because if the Exit button is the correct one
+    ; the other click sometimes still goes through before the client exits
+    ; potentially resulting in a click on the start page of the client which
+    ; opens up a website in a browser.
     ControlClick, x%YesButtonX% y%YesButtonY%, ahk_exe LeagueClientUx.exe
-
-    Sleep, 7000
+    ControlClick, x%ExitButtonX% y%ExitButtonY%, ahk_exe LeagueClientUx.exe
   }
 
   ;;; KILL ALL (DEAD) PROCESSES
