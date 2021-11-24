@@ -1,3 +1,5 @@
+﻿;@Ahk2Exe-SetMainIcon fass.ico
+
 AppVersion := "0.1"
 IniPath := "settings.ini"
 
@@ -21,7 +23,7 @@ for Index, Account in Accounts {
 Gui, New,, Choose Account
 Gui, Add, ListBox, r10 w240 vAccountUsername gLaunchViaList, %Listing%
 Gui, Add, Button, w240 gCancelButton, Cancel
-Gui, Add, StatusBar,, LoL-FASS v%AppVersion%
+Gui, Add, StatusBar,, LoL-FASS v%AppVersion% with ♥ by C0Nd3Mnd
 Gui, Show
 return
 
