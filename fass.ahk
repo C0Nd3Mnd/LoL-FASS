@@ -24,7 +24,9 @@ Process, Close, LeagueClientUx.exe
 
 ;;; RIOT CLIENT
 
-Run, "D:\Games\Riot Games\Riot Client\RiotClientServices.exe" --launch-product=league_of_legends --launch-patchline=live
+IniRead, RiotPath, %IniPath%, General, RiotPath
+
+Run, "%RiotPath%\Riot Client\RiotClientServices.exe" --launch-product=league_of_legends --launch-patchline=live
 
 Loop {
   if WinExist("Riot Client Main") {
