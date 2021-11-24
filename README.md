@@ -15,7 +15,7 @@ AutoHotkey script to switch between multiple League of Legends accounts quickly 
 
 ## Usage
 
-Launch `fass.exe` and double-click on the account you want to login to.
+Launch `fass.exe` and **double-click** on the account you want to login to.
 
 If the League Client is currently open, this script will attempt to exit the client gracefully first (so your game is dodged properly if you are currently in champ select (that is, if the client works properly)).
 
