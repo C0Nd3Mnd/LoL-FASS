@@ -42,12 +42,36 @@ LaunchViaList:
 Main:
   IniRead, AccountPassword, %IniPath%, Accounts, %AccountUsername%
 
+  if WinExist("ahk_exe LeagueClientUx.exe") {
+    WinGetPos, ,, ClientWidth, ClientHeight, ahk_exe LeagueClientUx.exe
+
+    CloseButtonX := ClientWidth * 0.9849
+    CloseButtonY := ClientHeight * 0.0203
+    ; Can be an exit button...
+    ExitButtonX := ClientWidth * 0.5447
+    ExitButtonY := ClientHeight * 0.5574
+    ; ...or a Yes button.
+    YesButtonX := ClientWidth * 0.4739
+    YesButtonY := ClientHeight * 0.6018
+
+    ControlClick, x%CloseButtonX% y%CloseButtonY%, ahk_exe LeagueClientUx.exe
+    ControlClick, x%ExitButtonX% y%ExitButtonY%, ahk_exe LeagueClientUx.exe
+    ControlClick, x%YesButtonX% y%YesButtonY%, ahk_exe LeagueClientUx.exe
+
+    Sleep, 7000
+  }
+
   ;;; KILL ALL (DEAD) PROCESSES
 
   Process, Close, RiotClientCrashHandler.exe
   Process, Close, RiotClientServices.exe
   Process, Close, LeagueClient.exe
   Process, Close, LeagueClientUx.exe
+
+  Process, WaitClose, RiotClientCrashHandler.exe
+  Process, WaitClose, RiotClientServices.exe
+  Process, WaitClose, LeagueClient.exe
+  Process, WaitClose, LeagueClientUx.exe
 
   ;;; RIOT CLIENT
 
