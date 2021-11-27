@@ -65,6 +65,9 @@ Main:
     ; opens up a website in a browser.
     ControlClick, x%YesButtonX% y%YesButtonY%, ahk_exe LeagueClientUx.exe
     ControlClick, x%ExitButtonX% y%ExitButtonY%, ahk_exe LeagueClientUx.exe
+
+    ;; Delay a bit so the dodge works more reliably.
+    Sleep, 1000
   }
 
   ;;; KILL ALL (DEAD) PROCESSES
