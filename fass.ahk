@@ -1,36 +1,57 @@
 ﻿;@Ahk2Exe-SetMainIcon fass.ico
 
-AppVersion := "0.1.1"
-IniPath := "settings.ini"
+global AppVersion := "0.1.1"
+global IniPath := "settings.ini"
 
 ;;; CHOOSE ACCOUNT
 
-IniRead, RawAccounts, %IniPath%, Accounts
+; Reads the account list from the settings file and generates a ListBox
+; compatible string with account usernames.
+GetAccountList() {
+  IniRead, RawAccounts, %IniPath%, Accounts
 
-Accounts := StrSplit(Trim(RawAccounts, OmitChars = " `t`n"), "`n")
+  Accounts := StrSplit(Trim(RawAccounts, OmitChars = " `t`n"), "`n")
 
-Listing :=
+  Listing :=
 
-for Index, Account in Accounts {
-  Username := StrSplit(Account, "=")[1]
-  Listing = %Listing%%Username%
+  for Index, Account in Accounts {
+    Username := StrSplit(Account, "=")[1]
+    Listing = %Listing%%Username%
 
-  if (Index != Accounts.MaxIndex()) {
-    Listing = %Listing%|
+    if (Index != Accounts.MaxIndex()) {
+      Listing = %Listing%|
+    }
   }
+
+  return Listing
 }
 
 Gui, New,, Choose Account
+Listing := GetAccountList()
 Gui, Add, ListBox, r10 w240 vAccountUsername gLaunchViaList, %Listing%
-Gui, Add, Button, w240 gCancelButton, Cancel
+Gui, Add, Button, w240 gRemoveAccount, Remove Account
+Gui, Add, Button, w240 gExitButton, Exit
 Gui, Add, StatusBar,, LoL-FASS v%AppVersion% with ♥ by C0Nd3Mnd
 Gui, Show
 return
 
 GuiEscape:
 GuiClose:
-CancelButton:
+ExitButton:
   ExitApp, 0
+
+RemoveAccount(AccountUsername) {
+  IniDelete, %IniPath%, Accounts, %AccountUsername%
+  Listing := GetAccountList()
+  GuiControl, , AccountUsername, |%Listing%
+}
+
+RemoveAccount:
+  Gui, Submit, NoHide
+  MsgBox, 4, Remove account?, Remove account "%AccountUsername%"?
+  IfMsgBox Yes
+    RemoveAccount(AccountUsername)
+  return
 
 LaunchViaList:
   if (A_GuiEvent == "DoubleClick") {
