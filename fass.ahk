@@ -26,13 +26,14 @@ GetAccountList() {
   return Listing
 }
 
-Gui, New,, Choose Account
+Gui, Main:New,, Choose Account
 Listing := GetAccountList()
-Gui, Add, ListBox, r10 w240 vAccountUsername gLaunchViaList, %Listing%
-Gui, Add, Button, w240 gRemoveAccount, Remove Account
-Gui, Add, Button, w240 gExitButton, Exit
-Gui, Add, StatusBar,, LoL-FASS v%AppVersion% with ♥ by C0Nd3Mnd
-Gui, Show
+Gui, Main:Add, ListBox, r10 w240 vAccountUsername gLaunchViaList, %Listing%
+Gui, Main:Add, Button, w240 gAddAccount, Add Account
+Gui, Main:Add, Button, w240 gRemoveAccount, Remove Account
+Gui, Main:Add, Button, w240 gExitButton, Exit
+Gui, Main:Add, StatusBar,, LoL-FASS v%AppVersion% with ♥ by C0Nd3Mnd
+Gui, Main:Show
 return
 
 GuiEscape:
@@ -40,14 +41,47 @@ GuiClose:
 ExitButton:
   ExitApp, 0
 
+AddAccount:
+  Gui, AddAccount:New,, Add Account
+  Gui, AddAccount:Add, Text,, Username
+  Gui, AddAccount:Add, Edit, w240 vNewUsername
+  Gui, AddAccount:Add, Text,, Password
+  Gui, AddAccount:Add, Edit, Password w240 vNewPassword
+  Gui, AddAccount:Add, Button, w240 gConfirmAddAccount, Add
+  Gui, AddAccount:Add, Button, w240 gCancel, Cancel
+  Gui, AddAccount:Add, Text, cGray w240, Note that if you enter a username that already exists, its password will be changed instead.
+  Gui, AddAccount:Show
+  return
+
+ReloadAccountList() {
+  Listing := GetAccountList()
+  GuiControl, Main:, AccountUsername, |%Listing%
+}
+
+ConfirmAddAccount:
+  Gui, AddAccount:Submit, NoHide
+  if (NewUsername == "") {
+    MsgBox, Username cannot be empty!
+    return
+  }
+
+  if (NewPassword == "") {
+    MsgBox, Password cannot be empty!
+    return
+  }
+
+  IniWrite, %NewPassword%, %IniPath%, Accounts, %NewUsername%
+  Gui, AddAccount:Hide
+  ReloadAccountList()
+  return
+
 RemoveAccount(AccountUsername) {
   IniDelete, %IniPath%, Accounts, %AccountUsername%
-  Listing := GetAccountList()
-  GuiControl, , AccountUsername, |%Listing%
+  ReloadAccountList()
 }
 
 RemoveAccount:
-  Gui, Submit, NoHide
+  Gui, Main:Submit, NoHide
   MsgBox, 4, Remove account?, Remove account "%AccountUsername%"?
   IfMsgBox Yes
     RemoveAccount(AccountUsername)
@@ -55,7 +89,7 @@ RemoveAccount:
 
 LaunchViaList:
   if (A_GuiEvent == "DoubleClick") {
-    Gui, Submit
+    Gui, Main:Submit
     Goto, Main
   }
   return
