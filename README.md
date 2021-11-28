@@ -13,6 +13,8 @@ AutoHotkey script to switch between multiple League of Legends accounts quickly 
 3. If you installed League of Legends in a different path than `C:\Riot Games`, adjust the path (it's the path to the `Riot Games` folder containing the `Riot Client` folder); do not include a trailing slash
 4. Launch `fass.exe` every time you want to switch accounts
 
+**Note that as of version 0.2.0, you can also add and remove accounts via the GUI.**
+
 ## Usage
 
 Launch `fass.exe` and **double-click** on the account you want to login to.
