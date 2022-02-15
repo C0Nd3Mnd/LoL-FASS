@@ -151,10 +151,12 @@ Main:
     Sleep, 1000
   }
 
-  ControlClick, x80 y80, Riot Client Main
+  WinGetPos, ,, LauncherWidth, LauncherHeight, Riot Client Main
 
   ; Username
-  Send, {Tab}
+  UsernameInputX := LauncherWidth * 0.13
+  UsernameInputY := LauncherHeight * 0.3
+  ControlClick, x%UsernameInputX% y%UsernameInputY%, Riot Client Main
   Send, {Text}%AccountUsername%
 
   ; Password
@@ -170,8 +172,6 @@ Main:
     Sleep, 5000
 
     if WinExist("Riot Client Main") {
-      WinGetPos, ,, LauncherWidth, LauncherHeight, Riot Client Main
-
       PlayButtonX := LauncherWidth * 0.125
       PlayButtonY := LauncherHeight * 0.9352
 
