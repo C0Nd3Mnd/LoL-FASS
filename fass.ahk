@@ -1,6 +1,6 @@
 ﻿;@Ahk2Exe-SetMainIcon fass.ico
 
-global AppVersion := "0.2.1"
+global AppVersion := "0.3.0"
 global IniPath := "settings.ini"
 
 ;;; CHOOSE ACCOUNT
@@ -166,6 +166,13 @@ Main:
   ; Login button
   Send, {Enter}
 
+  ; Show skip window to exit early.
+  SkipPosX := A_ScreenWidth - 300
+  SkipPosY := A_ScreenHeight - 140
+  Gui, Skip:New,, Update Skip
+  Gui, Skip:Add, Button, w240 gExit, Exit Early (Update Skip)
+  Gui, Skip:Show, x%SkipPosX% y%SkipPosY%
+
   ; Press play if the window still exists (sometimes it doesn't launch
   ; automatically).
   Loop {
@@ -181,4 +188,5 @@ Main:
     }
   }
 
+Exit:
   ExitApp, 0

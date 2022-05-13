@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0 (2022-05-13)
+
+- Added possibility to exit the script early - this is useful when an update takes longer than a few seconds and would therefore be paused and resumed continuously by the script
+
 ## v0.2.1 (2022-02-15)
 
 - Fixed username input field not being focused in some cases in recent Riot Client versions
