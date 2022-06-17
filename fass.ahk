@@ -8,7 +8,13 @@ global IniPath := "settings.ini"
 ; Reads the account list from the settings file and generates a ListBox
 ; compatible string with account usernames.
 GetAccountList() {
-  IniRead, RawAccounts, %IniPath%, Accounts
+  IniRead, UseAlias, %IniPath%, General, UseAlias
+
+  if (UseAlias == "true") {
+    IniRead, RawAccounts, %IniPath%, Alias
+  } else {
+    IniRead, RawAccounts, %IniPath%, Accounts
+  }
 
   Accounts := StrSplit(Trim(RawAccounts, OmitChars = " `t`n"), "`n")
 
@@ -95,6 +101,12 @@ LaunchViaList:
   return
 
 Main:
+  IniRead, UseAlias, %IniPath%, General, UseAlias
+
+  if (UseAlias == "true") {
+    IniRead, AccountUsername, %IniPath%, Alias, %AccountUsername%
+  }
+
   IniRead, AccountPassword, %IniPath%, Accounts, %AccountUsername%
 
   if WinExist("ahk_exe LeagueClientUx.exe") {
