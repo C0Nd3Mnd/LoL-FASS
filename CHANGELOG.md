@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.1 (2023-10-11)
+
+- Add 1s sleep to account for possible loading delay
+- Update position of "Play" button to reflect for recent changes in the Riot Client
+- This version contains rudimentary display name alias functionality, however there's no GUI for it as of now
+
 ## v0.3.0 (2022-05-13)
 
 - Added possibility to exit the script early - this is useful when an update takes longer than a few seconds and would therefore be paused and resumed continuously by the script

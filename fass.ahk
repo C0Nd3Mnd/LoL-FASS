@@ -1,6 +1,6 @@
 ﻿;@Ahk2Exe-SetMainIcon fass.ico
 
-global AppVersion := "0.3.0"
+global AppVersion := "0.3.1"
 global IniPath := "settings.ini"
 
 ;;; CHOOSE ACCOUNT
