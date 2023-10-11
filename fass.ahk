@@ -165,6 +165,8 @@ Main:
 
   WinGetPos, ,, LauncherWidth, LauncherHeight, Riot Client Main
 
+  Sleep, 1000
+
   ; Username
   UsernameInputX := LauncherWidth * 0.13
   UsernameInputY := LauncherHeight * 0.3
