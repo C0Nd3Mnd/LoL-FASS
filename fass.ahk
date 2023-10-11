@@ -193,8 +193,8 @@ Main:
     Sleep, 5000
 
     if WinExist("Riot Client Main") {
-      PlayButtonX := LauncherWidth * 0.125
-      PlayButtonY := LauncherHeight * 0.9352
+      PlayButtonX := LauncherWidth * 0.1302
+      PlayButtonY := LauncherHeight * 0.3472
 
       ControlClick, x%PlayButtonX% y%PlayButtonY%, Riot Client Main
     } else {
