@@ -2,7 +2,7 @@
 
 ## v0.3.2 (2025-05-04)
 
-- Fixed the window name for the Riot Client
+- Fix the window name for the Riot Client (#2, thanks @pmaldi)
 
 ## v0.3.1 (2023-10-11)
 
