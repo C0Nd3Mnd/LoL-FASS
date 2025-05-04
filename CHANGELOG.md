@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.2 (2025-05-04)
+
+- Fixed the window name for the Riot Client
+
 ## v0.3.1 (2023-10-11)
 
 - Add 1s sleep to account for possible loading delay

@@ -1,6 +1,6 @@
 ﻿;@Ahk2Exe-SetMainIcon fass.ico
 
-global AppVersion := "0.3.1"
+global AppVersion := "0.3.2"
 global IniPath := "settings.ini"
 
 ;;; CHOOSE ACCOUNT
@@ -109,8 +109,8 @@ Main:
 
   IniRead, AccountPassword, %IniPath%, Accounts, %AccountUsername%
 
-  if WinExist("ahk_exe LeagueClientUx.exe") {
-    WinGetPos, ,, ClientWidth, ClientHeight, ahk_exe LeagueClientUx.exe
+  if WinExist("ahk_exe Riot Client.exe") {
+    WinGetPos, ,, ClientWidth, ClientHeight, ahk_exe Riot Client.exe
 
     CloseButtonX := ClientWidth * 0.9849
     CloseButtonY := ClientHeight * 0.0203
@@ -121,7 +121,7 @@ Main:
     YesButtonX := ClientWidth * 0.4739
     YesButtonY := ClientHeight * 0.6018
 
-    ControlClick, x%CloseButtonX% y%CloseButtonY%, ahk_exe LeagueClientUx.exe
+    ControlClick, x%CloseButtonX% y%CloseButtonY%, ahk_exe Riot Client.exe
 
     ; Delay for a bit since the client can be slow to open the window sometimes.
     Sleep, 500
@@ -130,8 +130,8 @@ Main:
     ; the other click sometimes still goes through before the client exits
     ; potentially resulting in a click on the start page of the client which
     ; opens up a website in a browser.
-    ControlClick, x%YesButtonX% y%YesButtonY%, ahk_exe LeagueClientUx.exe
-    ControlClick, x%ExitButtonX% y%ExitButtonY%, ahk_exe LeagueClientUx.exe
+    ControlClick, x%YesButtonX% y%YesButtonY%, ahk_exe Riot Client.exe
+    ControlClick, x%ExitButtonX% y%ExitButtonY%, ahk_exe Riot Client.exe
 
     ;; Delay a bit so the dodge works more reliably.
     Sleep, 1000
@@ -142,12 +142,12 @@ Main:
   Process, Close, RiotClientCrashHandler.exe
   Process, Close, RiotClientServices.exe
   Process, Close, LeagueClient.exe
-  Process, Close, LeagueClientUx.exe
+  Process, Close, Riot Client.exe
 
   Process, WaitClose, RiotClientCrashHandler.exe
   Process, WaitClose, RiotClientServices.exe
   Process, WaitClose, LeagueClient.exe
-  Process, WaitClose, LeagueClientUx.exe
+  Process, WaitClose, Riot Client.exe
 
   ;;; RIOT CLIENT
 
@@ -156,21 +156,21 @@ Main:
   Run, "%RiotPath%\Riot Client\RiotClientServices.exe" --launch-product=league_of_legends --launch-patchline=live
 
   Loop {
-    if WinExist("Riot Client Main") {
+    if WinExist("Riot Client") {
       Sleep, 1000
       Break
     }
     Sleep, 1000
   }
 
-  WinGetPos, ,, LauncherWidth, LauncherHeight, Riot Client Main
+  WinGetPos, ,, LauncherWidth, LauncherHeight, Riot Client
 
   Sleep, 1000
 
   ; Username
   UsernameInputX := LauncherWidth * 0.13
   UsernameInputY := LauncherHeight * 0.3
-  ControlClick, x%UsernameInputX% y%UsernameInputY%, Riot Client Main
+  ControlClick, x%UsernameInputX% y%UsernameInputY%, Riot Client
   Send, {Text}%AccountUsername%
 
   ; Password
@@ -192,11 +192,11 @@ Main:
   Loop {
     Sleep, 5000
 
-    if WinExist("Riot Client Main") {
+    if WinExist("Riot Client") {
       PlayButtonX := LauncherWidth * 0.1302
       PlayButtonY := LauncherHeight * 0.3472
 
-      ControlClick, x%PlayButtonX% y%PlayButtonY%, Riot Client Main
+      ControlClick, x%PlayButtonX% y%PlayButtonY%, Riot Client
     } else {
       break
     }
